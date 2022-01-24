@@ -1,0 +1,15 @@
+dataSource: /Users/slincastro/Projects/GitDataAnalisis/jsonData/
+projects:
+  labyrinth:
+    ui:
+      path:
+  Oculus:
+    ui:
+      path:
+  AliquotNormalization:
+    ui:
+      path:
+    service:
+      path:
+    chron:
+      path: /Users/slincastro/Projects/IDT/WinSvc-FormulationsOrderConverter
