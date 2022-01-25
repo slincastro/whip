@@ -1,11 +1,16 @@
-import json
 import yaml
 
 
 class Configuration:
+   # def __init__(self, configuration_path):
+   #     self.configuration_path = configuration_path
+   #     self.config_file = "app_config.yml"
 
-    def get_configuration(section):
-        with open("app_config.yml") as ymlfile:
-            configuration = yaml.safe_load(ymlfile)
+    def __init__(self, configuration_path):
+        self.configuration_path = configuration_path
+
+    def get_configuration(self, section):
+        with open(self.configuration_path) as yml_file:
+            configuration = yaml.safe_load(yml_file)
 
         return configuration[section]
