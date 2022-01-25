@@ -1,13 +1,14 @@
 import pandas as pd
-from configuration.configuration import Configuration
+from src.configuration.configuration import Configuration
 import subprocess
 
-from filesManagers.json_manager import JsonManager
+from src.filesManagers.json_manager import JsonManager
+
+scriptPath = "./scripts/gitLogs.sh"
+json_storage = Configuration.get_configuration("dataSource")
 
 filename = "AliquotNormalization.json"
-scriptPath = "./scripts/gitLogs.sh"
 repo_configuration = Configuration.get_configuration("projects")["AliquotNormalization"]["chron"]["path"]
-json_storage = Configuration.get_configuration("dataSource")
 commits_file = json_storage + filename
 
 subprocess.check_call(scriptPath + " %s %s" % (repo_configuration, commits_file), shell=True)
