@@ -1,15 +1,10 @@
 dataSource: /path/to/json
 projects:
-  labyrinth:
-    ui:
-      path:
-  Oculus:
-    ui:
-      path:
-  AliquotNormalization:
-    ui:
-      path:
-    service:
-      path:
-    chron:
+  - project:
+      type : UI
+      name : AliquotNormalizationUI
+      path : /path/To/Project
+  - project:
+      type: Service
+      name: AliquotNormalizationService
       path: /path/To/Project
