@@ -14,6 +14,22 @@ class TestProjectManager(unittest.TestCase):
         print(projectPath)
         assert projectPath == "/path/To/Project"
 
+    def test_should_get_project_path_service_when_name_is_send(self):
+        project_requested_name = 'AliquotNormalizationService'
+        configuration = Configuration("./test/test_app_config.yml")
+        projectPath = ProjectManager(project_requested_name, configuration).get_project_path()
+
+        print(projectPath)
+        assert projectPath == "/path/To/ProjectService"
+
+    def test_should_get_empty_project_path_when_non_existing_name_is_send(self):
+        project_requested_name = 'AliquotNormalizationNonExisting'
+        configuration = Configuration("./test/test_app_config.yml")
+        projectPath = ProjectManager(project_requested_name, configuration).get_project_path()
+
+        print(projectPath)
+        assert projectPath == ""
+
     def test_should_return_json_object_name(self):
         project_requested_name = 'AliquotNormalization'
         configuration = Configuration("./test/test_app_config.yml")

@@ -7,4 +7,4 @@ projects:
   - project:
       type: Service
       name: AliquotNormalizationService
-      path: /path/To/Project
+      path: /path/To/ProjectService

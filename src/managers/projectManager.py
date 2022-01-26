@@ -11,6 +11,9 @@ class ProjectManager:
 
         project = [x["project"] for x in projects if x["project"]["name"] == self.project]
 
+        if len(project) == 0:
+            return ""
+
         return project[0]["path"]
 
     def get_json_name(self):

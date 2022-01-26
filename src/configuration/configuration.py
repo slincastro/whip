@@ -2,9 +2,6 @@ import yaml
 
 
 class Configuration:
-   # def __init__(self, configuration_path):
-   #     self.configuration_path = configuration_path
-   #     self.config_file = "app_config.yml"
 
     def __init__(self, configuration_path):
         self.configuration_path = configuration_path
