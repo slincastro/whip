@@ -2,8 +2,6 @@
 
 obtain metrics about commits to improve the flow of development
 
-
-
 ## Configuration
 * in App_config update :
 
@@ -17,15 +15,13 @@ obtain metrics about commits to improve the flow of development
 ## Run app
 
 > `source venv/bin/activate`
-> 
+> `python main.py`
 
 
 ## Troubleshooting
 ### Set Permisions
 
 > `chmod +x the_file_name`
->
->
 
 ## Run Test
 
