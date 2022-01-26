@@ -1,8 +1,21 @@
+import os
+import matplotlib.pyplot as plt
 import pandas as pd
 import subprocess
 from src.configuration.configuration import Configuration
 from src.filesManagers.json_manager import JsonManager
 from src.managers.projectManager import ProjectManager
+
+
+def display_title_bar():
+    os.system('clear')
+
+    print("\t**********************************************")
+    print("\t***  Let's - Review the project numbers!  ***")
+    print("\t**********************************************")
+
+
+display_title_bar()
 
 scriptPath = "./scripts/gitLogs.sh"
 configuration = Configuration("app_config.yml")
@@ -20,9 +33,20 @@ subprocess.check_call(scriptPath + " %s %s" % (repo_configuration, commits_file)
 
 JsonManager().complete_json(commits_file)
 
-data = pd.read_json(json_storage + filename)
-dataAggregated = data.groupby('name').size()
+commitsDf = pd.read_json(json_storage + filename)
+
+commitsDf['date'] = pd.to_datetime(commitsDf['date'], utc=True)
+commitsDf = commitsDf.set_index(pd.DatetimeIndex(commitsDf['date']))
+
+resampleDf = commitsDf.resample('W').size().to_frame('size').reset_index()
+
+print("Project Name : " + project_requested_name)
+
+dataAggregated = commitsDf.groupby('name').size().to_frame('size')
+
 print(dataAggregated)
 
+plt.bar(resampleDf["date"], height=resampleDf["size"])
 
+plt.show()
 
