@@ -7,7 +7,7 @@ from src.managers.projectManager import ProjectManager
 scriptPath = "./scripts/gitLogs.sh"
 configuration = Configuration("app_config.yml")
 json_storage = configuration.get_configuration("dataSource")
-project_requested_name = 'AliquotNormalization.chron'
+project_requested_name = 'AliquotNormalizationWinService.chron'
 
 project_manager = ProjectManager(project_requested_name, configuration)
 
