@@ -1,12 +1,12 @@
-import os
+import subprocess
+
 import matplotlib.pyplot as plt
 import pandas as pd
-import subprocess
+
 from src.configuration.configuration import Configuration
 from src.consoleDrawings.titles import display_title_bar
 from src.filesManagers.json_manager import JsonManager
 from src.managers.projectManager import ProjectManager
-
 
 scriptPath = "./scripts/gitLogs.sh"
 project_requested_name = 'AliquotNormalizationWinService'
