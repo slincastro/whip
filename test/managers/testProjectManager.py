@@ -37,3 +37,12 @@ class TestProjectManager(unittest.TestCase):
 
         print(jsonName)
         assert jsonName == "AliquotNormalization.json"
+
+    def test_should_return_jsonPath_when_is_requested(self):
+        project_requested_name = 'AliquotNormalization'
+        expected_path = F"/path/to/json/{project_requested_name}.json"
+        configuration = Configuration("./test/test_app_config.yml")
+
+        json_path = ProjectManager(project_requested_name, configuration).json_path
+        print(F"-> {json_path} - {expected_path}")
+        assert json_path == expected_path

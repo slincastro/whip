@@ -9,4 +9,4 @@ class TestProjectManager(unittest.TestCase):
         json_storage = Configuration("./test/test_app_config.yml").get_configuration("dataSource")
         print(json_storage)
 
-        assert json_storage == "/path/to/json"
+        assert json_storage == "/path/to/json/"

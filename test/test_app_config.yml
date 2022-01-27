@@ -1,4 +1,4 @@
-dataSource: /path/to/json
+dataSource: /path/to/json/
 projects:
   - project:
       type : UI

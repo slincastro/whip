@@ -3,50 +3,40 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import subprocess
 from src.configuration.configuration import Configuration
+from src.consoleDrawings.titles import display_title_bar
 from src.filesManagers.json_manager import JsonManager
 from src.managers.projectManager import ProjectManager
 
 
-def display_title_bar():
-    os.system('clear')
-
-    print("\t**********************************************")
-    print("\t***  Let's - Review the project numbers!  ***")
-    print("\t**********************************************")
-
-
+scriptPath = "./scripts/gitLogs.sh"
+project_requested_name = 'AliquotNormalizationWinService'
 display_title_bar()
 
-scriptPath = "./scripts/gitLogs.sh"
 configuration = Configuration("app_config.yml")
-json_storage = configuration.get_configuration("dataSource")
-
-project_requested_name = 'AliquotNormalizationWinService'
 
 project_manager = ProjectManager(project_requested_name, configuration)
 
-filename = project_manager.get_json_name()
 repo_configuration = project_manager.get_project_path()
-commits_file = json_storage + filename
+commits_file_path = project_manager.json_path
 
-subprocess.check_call(scriptPath + " %s %s" % (repo_configuration, commits_file), shell=True)
+subprocess.check_call(scriptPath + " %s %s" % (repo_configuration, commits_file_path), shell=True)
 
-JsonManager().complete_json(commits_file)
+JsonManager().complete_json(commits_file_path)
 
-commitsDf = pd.read_json(json_storage + filename)
 
+commitsDf = pd.read_json(commits_file_path)
 commitsDf['date'] = pd.to_datetime(commitsDf['date'], utc=True)
 commitsDf = commitsDf.set_index(pd.DatetimeIndex(commitsDf['date']))
 
-resampleDf = commitsDf.resample('W').size().to_frame('NumberOfCommits').reset_index()
+commits_by_month = commitsDf.resample('W').size().to_frame('NumberOfCommits').reset_index()
 
 print(F"Project Name : {project_requested_name}")
 
-dataAggregated = commitsDf.groupby('name').size().to_frame('NumberOfCommits').reset_index()
+commits_per_dev = commitsDf.groupby('name').size().to_frame('NumberOfCommits').reset_index()
 
-print(dataAggregated)
+print(commits_per_dev)
 
-plt.bar(resampleDf["date"], height=resampleDf["NumberOfCommits"])
+plt.bar(commits_by_month["date"], height=commits_by_month["NumberOfCommits"])
 
 plt.show()
 
