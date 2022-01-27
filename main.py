@@ -1,16 +1,15 @@
-import subprocess
-
 import matplotlib.pyplot as plt
 import pandas as pd
 
 from src.configuration.configuration import Configuration
 from src.consoleDrawings.titles import display_title_bar
-from src.filesManagers.json_manager import JsonManager
+from src.filesManagers.json_manager import generate_json
 from src.managers.projectManager import ProjectManager
 
-scriptPath = "./scripts/gitLogs.sh"
-project_requested_name = 'AliquotNormalizationWinService'
+
 display_title_bar()
+
+project_requested_name = 'AliquotNormalizationWinService'
 
 configuration = Configuration("app_config.yml")
 
@@ -19,10 +18,7 @@ project_manager = ProjectManager(project_requested_name, configuration)
 repo_configuration = project_manager.get_project_path()
 commits_file_path = project_manager.json_path
 
-subprocess.check_call(scriptPath + " %s %s" % (repo_configuration, commits_file_path), shell=True)
-
-JsonManager().complete_json(commits_file_path)
-
+generate_json(repo_configuration, commits_file_path)
 
 commitsDf = pd.read_json(commits_file_path)
 commitsDf['date'] = pd.to_datetime(commitsDf['date'], utc=True)
