@@ -3,7 +3,7 @@ import pandas as pd
 
 from src.configuration.configuration import Configuration
 from src.consoleDrawings.titles import display_title_bar
-from src.filesManagers.json_manager import generate_json
+from src.managers.json_manager import generate_json
 from src.managers.projectManager import ProjectManager
 
 
