@@ -24,7 +24,7 @@ commitsDf = pd.read_json(commits_file_path)
 commitsDf['date'] = pd.to_datetime(commitsDf['date'], utc=True)
 commitsDf = commitsDf.set_index(pd.DatetimeIndex(commitsDf['date']))
 
-commits_by_month = commitsDf.resample('W').size().to_frame('NumberOfCommits').reset_index()
+commits_by_week = commitsDf.resample('W').size().to_frame('NumberOfCommits').reset_index()
 
 print(F"Project Name : {project_requested_name}")
 
@@ -32,7 +32,7 @@ commits_per_dev = commitsDf.groupby('name').size().to_frame('NumberOfCommits').r
 
 print(commits_per_dev)
 
-plt.bar(commits_by_month["date"], height=commits_by_month["NumberOfCommits"])
+plt.bar(commits_by_week["date"], height=commits_by_week["NumberOfCommits"])
 
 plt.show()
 
