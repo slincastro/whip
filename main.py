@@ -38,15 +38,15 @@ commitsDf = pd.read_json(json_storage + filename)
 commitsDf['date'] = pd.to_datetime(commitsDf['date'], utc=True)
 commitsDf = commitsDf.set_index(pd.DatetimeIndex(commitsDf['date']))
 
-resampleDf = commitsDf.resample('W').size().to_frame('size').reset_index()
+resampleDf = commitsDf.resample('W').size().to_frame('NumberOfCommits').reset_index()
 
 print("Project Name : " + project_requested_name)
 
-dataAggregated = commitsDf.groupby('name').size().to_frame('size')
+dataAggregated = commitsDf.groupby('name').size().to_frame('NumberOfCommits').reset_index()
 
 print(dataAggregated)
 
-plt.bar(resampleDf["date"], height=resampleDf["size"])
+plt.bar(resampleDf["date"], height=resampleDf["NumberOfCommits"])
 
 plt.show()
 
