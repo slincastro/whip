@@ -8,7 +8,7 @@ obtain metrics about commits to improve the flow of development
 ` dataSource: some/folder/toStore/json/objects`
 ` projects:`
   `- project:`
-      `type : <is used as metadata>`
+      `type : <used as metadata>`
       `name : <used as name of the project>`
       `path : path/of/the/repository/to/analyce`
 
