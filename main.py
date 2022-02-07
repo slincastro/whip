@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from src.PlotManager.BarPlot import draw_bar
+from src.PlotManager.BarPlot import show_bar
 from src.configuration.configuration import Configuration
 from src.consoleDrawings.titles import display_title_bar
 from src.filters.CommitsTimeLine import CommitsTimeline
@@ -32,5 +32,5 @@ commits_per_dev = commitsDf.groupby('name').size().to_frame('NumberOfCommits').r
 
 print(commits_per_dev)
 
-draw_bar(commits_peer_week)
+show_bar(commits_peer_week)
 
