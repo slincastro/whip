@@ -1,24 +1,19 @@
-import os
 import subprocess
 
-
-def complete_json(path):
-    backup_file = path + '.bak'
-
-    with open(path, 'r') as read_obj, open(backup_file, 'w') as write_obj:
-        write_obj.write("[")
-
-        for line in read_obj:
-            write_obj.write(line)
-
-        write_obj.write("{}")
-        write_obj.write("]")
-
-    os.remove(path)
-    os.rename(backup_file, path)
+_LOG_FORMAT = r'{"name": "%aN", "email": "%aE", "date": "%aD"},'
 
 
-def generate_json(repository_path, commits_file_path):
-    scriptPath = "./scripts/gitLogs.sh"
-    subprocess.check_call(scriptPath + " %s %s" % (repository_path, commits_file_path), shell=True)
-    complete_json(commits_file_path)
+def generate_json(repository_path):
+    print(f'Repository path: {repository_path}')
+    run_results = subprocess.run(
+        [
+            "git",
+            "--git-dir",
+            repository_path + "/.git",
+            "log",
+            f"--pretty=format:{_LOG_FORMAT}"
+        ],
+        capture_output=True
+    )
+    json_str = run_results.stdout.decode()
+    return '[' + json_str[:-1] + ']'
