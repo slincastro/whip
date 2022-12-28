@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.PlotManager.BarPlot import show_bar
+from src.PlotManager.BarPlot import *
 from src.configuration.configuration import Configuration
 from src.consoleDrawings.titles import display_title_bar
 from src.filters.CommitsTimeLine import CommitsTimeline
@@ -10,7 +10,7 @@ from src.managers.projectManager import ProjectManager
 
 display_title_bar()
 
-project_requested_name = 'AliquotNormalizationWinService'
+project_requested_name = 'App-Personas'
 
 configuration = Configuration("app_config.yml")
 
@@ -30,8 +30,10 @@ commits_per_dev = (
     .size()
     .to_frame('NumberOfCommits')
     .reset_index()
+    .sort_values(by=['NumberOfCommits'])
 )
 
-print(commits_per_dev)
-
-show_bar(commits_peer_week)
+#print(commits_per_dev)
+#show_bar_by_people(commits_per_dev, "name")
+show_horizontal_bar(commits_per_dev)
+#show_bar(commits_peer_week)
