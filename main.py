@@ -33,7 +33,9 @@ commits_per_dev = (
     .sort_values(by=['NumberOfCommits'])
 )
 
+#print(commits_peer_week)
 #print(commits_per_dev)
 #show_bar_by_people(commits_per_dev, "name")
 show_horizontal_bar(commits_per_dev)
+#show_horizontal_commits_per_month(commits_peer_week)
 #show_bar(commits_peer_week)
